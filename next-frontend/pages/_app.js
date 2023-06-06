@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
       <meta name="keywords" content="TechShaan, Tech, Shaan, Tech News, Tech Updates, Tech Blog" />
       <meta name="author" content="Muhammad DAnish" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="" href="/favicon.ico" />
+      <link rel="icon" href="/favicon.ico" />
     </Head>
     <Navbar />
     <Component {...pageProps} />
