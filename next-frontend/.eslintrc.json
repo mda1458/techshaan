@@ -1,0 +1,8 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    // invalid dom properties
+    // "react/no-unknown-property": ["error"],
+    "@next/next/no-img-element": "off"
+  }
+}
