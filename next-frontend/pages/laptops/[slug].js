@@ -1,7 +1,20 @@
-import React from 'react'
+import {useState} from 'react'
 import axios from 'axios'
+import Link from 'next/link';
 
-const Slug = ({data}) => {
+const Slug = ({data, addtoCart}) => {
+  const [qty, setQty] = useState(1);
+
+  const updateCart = () => {
+    const item = {
+      id: Math.random(),
+      slug: data.attributes.slug,
+      title: data.attributes.title,
+      price: data.attributes.price,
+      image: `http://127.0.0.1:1337${data.attributes.image.data[0].attributes.url}`,
+    };
+    addtoCart(item, qty);
+  };
   return (
     <section className="text-gray-400 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -121,24 +134,26 @@ const Slug = ({data}) => {
                 Rs. {data.attributes.price}
               </span>
             </div>
-            {/* Addtocart and checkout */}
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-800 mb-5">
               <div className="flex ml-6 items-center">
                 <span className="mr-3">Quantity</span>
                 <div className="relative">
                   <input
                     type="number"
-                    defaultValue={1}
+                    value={qty}
+                    onChange={(e) => setQty(e.target.value)}
                     className="w-12 pl-2 text-center outline-none focus:ring-2 focus:ring-yellow-400 text-white bg-gray-800 rounded-md"
                   />
                 </div>
               </div>
-              <button className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-white hover:text-black  rounded">
+              <button 
+              onClick={updateCart}
+              className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-white hover:text-black  rounded">
                 Add to Cart
               </button>
-              <button className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-white hover:text-black rounded">
+              <Link href={"/cart"} className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-white hover:text-black rounded">
                 Checkout
-              </button>
+              </Link>
             </div>
           </div>
         </div>
