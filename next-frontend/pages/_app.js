@@ -3,6 +3,7 @@ import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import '@/styles/globals.css'
 import Head from 'next/head'
+import { ToastContainer } from 'react-toastify'
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState([]);
@@ -43,24 +44,32 @@ export default function App({ Component, pageProps }) {
     setCart([]);
   };
 
+
   return (
-  <>
-    <Head>
-      <title>TechShaan</title>
-      <meta name="description" content="TechShaan is a blog website where you can find all the latest tech news and updates." />
-      <meta name="keywords" content="TechShaan, Tech, Shaan, Tech News, Tech Updates, Tech Blog" />
-      <meta name="author" content="Muhammad Danish" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-    <Navbar cart={cart} />
-    <Component
-      cart={cart}
-      addtoCart={addtoCart}
-      removefromCart={removefromCart}
-      clearCart={clearCart}
-     {...pageProps} />
-    <Footer />
-  </>
-  )
+    <>
+      <Head>
+        <title>TechShaan</title>
+        <meta
+          name="description"
+          content="TechShaan is a blog website where you can find all the latest tech news and updates."
+        />
+        <meta
+          name="keywords"
+          content="TechShaan, Tech, Shaan, Tech News, Tech Updates, Tech Blog"
+        />
+        <meta name="author" content="Muhammad Danish" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Navbar cart={cart} />
+      <Component
+        cart={cart}
+        addtoCart={addtoCart}
+        removefromCart={removefromCart}
+        clearCart={clearCart}
+        {...pageProps}
+      />
+      <Footer />
+    </>
+  );
 }

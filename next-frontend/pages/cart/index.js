@@ -69,7 +69,7 @@ const Cart = ({ cart, removefromCart }) => {
             ))
           )}
         </div>
-        <div className="bg-blue-900 bg-opacity-60 rounded mt-10 px-4 pt-8 lg:mt-0">
+        <div className="bg-blue-700   rounded mt-10 px-4 pt-8 lg:mt-0">
           <p className="text-xl font-medium">Order Details</p>
           <p className="text-white">
             Complete your order by providing your payment details.
@@ -178,10 +178,10 @@ const Cart = ({ cart, removefromCart }) => {
               </p>
             </div>
           </div>
-          <Link href={"/payment"}>
+          <Link href={`/cart/payment`}>
             <button
-              className={`mt-4 mb-8 w-full rounded-md bg-yellow-500 px-6 py-3 font-medium text-white ${
-                bill === 0 ? "bg-gray-600" : ""
+              className={`mt-4 mb-8 w-full rounded-md px-6 py-3 font-medium text-white ${
+                bill === 0 ? "bg-gray-600" : "bg-yellow-500"
               }`}
               disabled={bill === 0}
             >
@@ -192,6 +192,6 @@ const Cart = ({ cart, removefromCart }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Cart
