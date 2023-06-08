@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import  Link  from "next/link"
 import { GiComputerFan } from "react-icons/gi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-const Navbar = ({cart}) => {
-  const [user, setUser] = useState();
+const Navbar = ({cart, user, setUser}) => {
   const [drop, setDrop] = useState(true);
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setUser(JSON.parse(localStorage.getItem("user")));
-    }
-  }, []);
+  const router = useRouter();
+
+  const logout = (e) => {
+    e.preventDefault();
+    setUser(null);
+    setDrop(true);
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    router.push('/')
+  }
   return (
     <header className="text-white bg-blue-700   w-full body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -66,7 +71,7 @@ const Navbar = ({cart}) => {
               <span className="sr-only">Open user menu</span>
               <img
                 className="w-8 h-8 rounded-full"
-                src="https://img.freepik.com/free-icon/user_318-790139.jpg"
+                src={user.imgsrc||"https://img.freepik.com/free-icon/user_318-790139.jpg"}
                 alt="user photo"
               />
             </button>
@@ -78,7 +83,7 @@ const Navbar = ({cart}) => {
             >
               <div className="flex flex-col text-center">
                 <span className="block w-full text-black font-semibold px-4 py-2 text-sm">
-                  Hello
+                  {user.name}
                 </span>
                 <Link href={"/profile"} className="block w-full text-black hover:bg-blue-700 hover:text-white px-4 py-2 text-sm">
                     Profile
@@ -86,12 +91,12 @@ const Navbar = ({cart}) => {
                 <Link href={"/orders"} className="block w-full text-black hover:bg-blue-700 hover:text-white px-4 py-2 text-sm">
                     Orders
                 </Link>
-                <Link
-                  href={"/logout"}
+                <button
+                  onClick={logout}
                   className="block w-full text-black hover:bg-blue-700 hover:text-white px-4 py-2 text-sm"
                 >
                   Logout
-                </Link>
+                </button>
               </div>
             </div>
           </div>

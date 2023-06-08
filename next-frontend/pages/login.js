@@ -1,7 +1,38 @@
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
-const Login = () => {
+const Login = ({setUser}) => {
+  const router = useRouter();
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      router.push("/");
+    }
+  }, []);
+  
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const userLog = {
+      identifier:email,
+      password,
+    };
+
+    try {
+      const res = await axios.post("http://127.0.0.1:1337/api/auth/local", userLog);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res.data.jwt);
+      setUser(res.data.user);
+      router.push("/");
+    } catch (error) {
+      alert(error.response.data.error.message);
+    }
+
+  }
   return (
     <div className="md:px-56 my-2 md:my-11">
       <div className="flex w-96 flex-col space-y-5 rounded-lg border py-10 px-5 shadow-xl mx-auto">
@@ -14,6 +45,7 @@ const Login = () => {
             type="email"
             id="email"
             required
+            onChange={(e) => setEmail(e.target.value)}
             autoComplete="off"
             className="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-blue-600 focus:outline-none focus:ring-0"
             placeholder=" "
@@ -31,6 +63,7 @@ const Login = () => {
             type="password"
             id="password"
             required
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
             className="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-blue-600 focus:outline-none focus:ring-0"
             placeholder=" "
@@ -43,7 +76,7 @@ const Login = () => {
             Enter Your Password
           </label>
         </div>
-        <button type="submit" className="rounded-lg bg-blue-700 py-3 font-bold text-white">
+        <button onClick={handleLogin} type="submit" className="rounded-lg bg-blue-700 py-3 font-bold text-white">
           Login
         </button>
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
