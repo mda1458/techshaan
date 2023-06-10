@@ -21,37 +21,7 @@ const Payment = ({ cart, rate }) => {
       router.push("/login");
     } else if (cart.length === 0) {
       router.push("/");
-    }
-    console.log(
-      [
-                        {
-                          reference_id: Math.random().toString(36).substring(2,7),
-                          items: cart.map((item) => ({
-                            name: item.title,
-                            unit_amount: {
-                              currency_code: "USD",
-                              value: (item.price * rate).toFixed(2),
-                            },
-                            quantity: item.quantity,
-                            category: item.category,
-                          })),
-                          amount: {
-                            currency_code: "USD",
-                            value: (total * rate + 0.1).toFixed(2),
-                            breakdown: {
-                              item_total: {
-                                currency_code: "USD",
-                                value: (total * rate).toFixed(2),
-                              },
-                              shipping: {
-                                currency_code: "USD",
-                                value: 0.1,
-                              },
-                            },
-                          },
-                        }
-                      ]
-    );
+    };
     setTotal(Number(cart.reduce((a, b) => a + b.price * b.quantity, 0)));
   }, [cart, total]);
   return (
