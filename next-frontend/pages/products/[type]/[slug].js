@@ -9,6 +9,7 @@ const Slug = ({data, addtoCart}) => {
     const item = {
       id: Math.random(),
       slug: data.attributes.slug,
+      category: data.attributes.category,
       title: data.attributes.title,
       price: data.attributes.price,
       image: `http://127.0.0.1:1337${data.attributes.image.data[0].attributes.url}`,
