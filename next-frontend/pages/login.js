@@ -26,7 +26,8 @@ const Login = ({setUser}) => {
       const res = await axios.post("http://127.0.0.1:1337/api/auth/local", userLog);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       localStorage.setItem("token", res.data.jwt);
-      setUser(res.data.user);
+      console.log(JSON.parse(localStorage.getItem("user")));
+      setUser(JSON.parse(localStorage.getItem("user")));
       router.push("/");
     } catch (error) {
       alert(error.response.data.error.message);
@@ -47,7 +48,7 @@ const Login = ({setUser}) => {
             required
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="off"
-            className="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-blue-600 focus:outline-none focus:ring-0"
+            className="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm  text-black focus:border-blue-600 focus:outline-none focus:ring-0"
             placeholder=" "
           />
           <label
@@ -65,7 +66,7 @@ const Login = ({setUser}) => {
             required
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="off"
-            className="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-white focus:border-blue-600 focus:outline-none focus:ring-0"
+            className="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm  text-black focus:border-blue-600 focus:outline-none focus:ring-0"
             placeholder=" "
           />
           <label
@@ -76,7 +77,7 @@ const Login = ({setUser}) => {
             Enter Your Password
           </label>
         </div>
-        <button onClick={handleLogin} type="submit" className="rounded-lg bg-blue-700 py-3 font-bold text-white">
+        <button onClick={handleLogin} type="submit" className="rounded-lg bg-blue-700 py-3 font-bold  text-black">
           Login
         </button>
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">

@@ -35,7 +35,7 @@ const Payment = ({ cart, rate }) => {
               {cart.map((item) => (
                 <div key={item.id} className="flex w-full flex-col px-4 py-4">
                   <span className="font-medium">{item.title.slice(0, 35)}</span>
-                  <span className=" text-white">Quantity: {item.quantity}</span>
+                  <span className="  text-black">Quantity: {item.quantity}</span>
                   <p className="mt-auto text-yellow-500">{`${
                     item.quantity
                   } x Rs. ${item.price} = Rs. ${

@@ -26,9 +26,9 @@ const Slug = ({data, addtoCart}) => {
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">
-              Laptop
+              {data.attributes.category.toUpperCase()}
             </h2>
-            <h1 className="text-white text-3xl title-font font-medium mb-1">
+            <h1 className=" text-black text-3xl title-font font-medium mb-1">
               {data.attributes.title}
             </h1>
             <div className="flex mb-4">
@@ -130,11 +130,11 @@ const Slug = ({data, addtoCart}) => {
               </span>
             </div>
             <div className="flex">
-              <span className="title-font font-medium text-2xl text-white">
+              <span className="title-font font-medium text-2xl  text-black">
                 Rs. {data.attributes.price}
               </span>
             </div>
-            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-800 mb-5">
+            <div className="flex mt-6 items-center pb-5 border-b-2 mb-5">
               <div className="flex ml-6 items-center">
                 <span className="mr-3">Quantity</span>
                 <div className="relative">
@@ -142,16 +142,16 @@ const Slug = ({data, addtoCart}) => {
                     type="number"
                     value={qty}
                     onChange={(e) => setQty(e.target.value)}
-                    className="w-12 pl-2 text-center outline-none focus:ring-2 focus:ring-yellow-400 text-white bg-gray-800 rounded-md"
+                    className="w-12 pl-2 text-center outline-none ring-2 ring-blue-700 focus:ring-yellow-400 text-black rounded-md"
                   />
                 </div>
               </div>
               <button 
               onClick={updateCart}
-              className="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-white hover:text-black  rounded">
+              className="flex ml-auto  text-black bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-white hover:text-black  rounded">
                 Add to Cart
               </button>
-              <Link href={"/cart"} className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-white hover:text-black rounded">
+              <Link href={"/cart"} className="flex ml-auto  text-black bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-white hover:text-black rounded">
                 Checkout
               </Link>
             </div>
@@ -159,7 +159,7 @@ const Slug = ({data, addtoCart}) => {
         </div>
       </div>
       <div className="container px-5 pb-24 mx-auto">
-        <h1 className="text-3xl font-medium title-font text-white mb-12 text-center">
+        <h1 className="text-3xl font-medium title-font  text-black mb-12 text-center">
           Description
         </h1>
         <div className="flex flex-wrap -m-4">
@@ -169,6 +169,7 @@ const Slug = ({data, addtoCart}) => {
     </section>
   );
 }
+
 
 export async function getServerSideProps(context) {
   const res = await axios.get(

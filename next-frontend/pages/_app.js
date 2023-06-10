@@ -6,7 +6,7 @@ import Head from 'next/head'
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState()
+  const [user, setUser] = useState([]);
   useEffect(() => {
     if(localStorage.getItem('user')){
       setUser(localStorage.getItem("user"));
