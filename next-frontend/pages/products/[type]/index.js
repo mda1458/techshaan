@@ -25,7 +25,7 @@ const Products = ({data}) => {
           <img
             src="https://www.bagbazaars.com/assets/img/no-product-found.png"
             alt="No Products Found"
-            height="230px"
+            className="h-56"
           />
         </div>
       ) : (
