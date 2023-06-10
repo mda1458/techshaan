@@ -24,12 +24,12 @@ const Cart = ({ cart, removefromCart }) => {
       <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div className="px-4 pt-8">
           <p className="text-xl font-medium">Order Summary</p>
-          <p className="text-white">
+          <p className="text-black">
             Check your items and quantity before proceeding to checkout.
           </p>
           {cart.length === 0 ? (
             <img
-              src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png"
+              src="https://i.pinimg.com/736x/2e/ac/fa/2eacfa305d7715bdcd86bb4956209038--android.jpg"
               alt="empty cart"
               className="md:mt-10"
             />
