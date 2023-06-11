@@ -14,22 +14,22 @@
   "attributes": {
     "email": {
       "type": "email",
-      "required": true
+      "required": false
     },
     "orderid": {
       "type": "uid",
-      "required": true
+      "required": false
     },
     "products": {
       "type": "json",
-      "required": true
+      "required": false
     },
     "paymentinfo": {
       "type": "json"
     },
     "name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "address": {
       "type": "text"
@@ -43,22 +43,16 @@
     "status": {
       "type": "enumeration",
       "enum": [
-        "Payment Success & Delivered",
-        "Payment Success & Not Delivered",
-        "Payment Failed"
-      ]
+        "Delivered",
+        "Not Delivered"
+      ],
+      "default": "Not Delivered"
     },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "orders"
-    },
-    "tid": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::transaction.transaction",
-      "mappedBy": "order"
     }
   }
 }

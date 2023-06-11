@@ -9,7 +9,33 @@ const Payment = ({ cart, rate }) => {
 
   const paymentSuccess = (details) => {
     console.log(details);
-
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    };
+    console.log("Hello:");
+    axios
+      .post(
+        "http://127.0.0.1:1337/api/orders",
+        {
+          order: {
+            orderid: details.id,
+            email: details.payer.email_address,
+            name: details.payer.name.given_name,
+            address: details.payer.address.country_code,
+            transactionid: details.id,
+            user: JSON.parse(localStorage.getItem("user")).username,
+          }
+        },
+        { headers: headers }
+      )
+      .then((res) => {
+        console.log(res);
+        localStorage.removeItem("cart");
+        router.push("/cart/success");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const paymentError = (err) => {
@@ -21,7 +47,7 @@ const Payment = ({ cart, rate }) => {
       router.push("/login");
     } else if (cart.length === 0) {
       router.push("/");
-    };
+    }
     setTotal(Number(cart.reduce((a, b) => a + b.price * b.quantity, 0)));
   }, [cart, total]);
   return (
@@ -36,7 +62,9 @@ const Payment = ({ cart, rate }) => {
               {cart.map((item) => (
                 <div key={item.id} className="flex w-full flex-col px-4 py-4">
                   <span className="font-medium">{item.title.slice(0, 35)}</span>
-                  <span className="  text-black">Quantity: {item.quantity}</span>
+                  <span className="  text-black">
+                    Quantity: {item.quantity}
+                  </span>
                   <p className="mt-auto text-yellow-500">{`${
                     item.quantity
                   } x Rs. ${item.price} = Rs. ${
@@ -115,6 +143,7 @@ const Payment = ({ cart, rate }) => {
           </div>
         </div>
       </div>
+      <button onClick={paymentSuccess}>Click</button>
     </div>
   );
 };
