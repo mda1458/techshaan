@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
 
-const Payment = ({ cart, rate }) => {
+const Payment = ({ cart, setCart, rate }) => {
   const [total, setTotal] = useState(0);
   const router = useRouter();
 
@@ -18,11 +18,10 @@ const Payment = ({ cart, rate }) => {
       name: details.payer.name.given_name,
       address: details.payer.address.country_code,
       transactionid: details.id,
-      user: JSON.parse(localStorage.getItem("user")).id,
       bill: details.purchase_units[0].amount.value / rate,
       products: cart,
       paymentinfo: details,
-
+      username: JSON.parse(localStorage.getItem("user")).username,
     }
     console.log(data);
     axios
@@ -36,7 +35,7 @@ const Payment = ({ cart, rate }) => {
       )
       .then((res) => {
         console.log(res);
-        localStorage.removeItem("cart");
+        setCart([]);
         router.push("/cart/success");
       })
       .catch((err) => {
@@ -52,7 +51,7 @@ const Payment = ({ cart, rate }) => {
     if (localStorage.getItem("user") === null) {
       router.push("/login");
     } else if (cart.length === 0) {
-      router.push("/");
+      // router.push("/");
     }
     setTotal(Number(cart.reduce((a, b) => a + b.price * b.quantity, 0)));
   }, [cart, total]);

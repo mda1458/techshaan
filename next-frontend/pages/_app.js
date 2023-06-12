@@ -67,6 +67,7 @@ export default function App({ Component, pageProps }) {
       <Navbar cart={cart} user={user} setUser={setUser}/>
       <Component
         cart={cart}
+        setCart={setCart}
         addtoCart={addtoCart}
         removefromCart={removefromCart}
         clearCart={clearCart}

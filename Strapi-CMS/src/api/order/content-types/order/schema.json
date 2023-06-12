@@ -48,7 +48,7 @@
       ],
       "default": "Not Delivered"
     },
-    "user": {
+    "username": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",

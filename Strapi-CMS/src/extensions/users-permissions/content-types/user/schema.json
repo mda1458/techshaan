@@ -73,12 +73,6 @@
         "images"
       ]
     },
-    "orders": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::order.order",
-      "mappedBy": "user"
-    },
     "name": {
       "type": "string",
       "required": true
@@ -94,6 +88,12 @@
     "imgsrc": {
       "type": "string",
       "required": false
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
+      "mappedBy": "username"
     }
   }
 }
