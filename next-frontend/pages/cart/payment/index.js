@@ -12,20 +12,26 @@ const Payment = ({ cart, rate }) => {
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     };
-    console.log("Hello:");
+    const data = {
+      orderid: details.id,
+      email: details.payer.email_address,
+      name: details.payer.name.given_name,
+      address: details.payer.address.country_code,
+      transactionid: details.id,
+      user: JSON.parse(localStorage.getItem("user")).id,
+      bill: details.purchase_units[0].amount.value / rate,
+      products: cart,
+      paymentinfo: details,
+
+    }
+    console.log(data);
     axios
       .post(
         "http://127.0.0.1:1337/api/orders",
         {
-          order: {
-            orderid: details.id,
-            email: details.payer.email_address,
-            name: details.payer.name.given_name,
-            address: details.payer.address.country_code,
-            transactionid: details.id,
-            user: JSON.parse(localStorage.getItem("user")).username,
-          }
-        },
+          data: data,
+        }
+        ,
         { headers: headers }
       )
       .then((res) => {
